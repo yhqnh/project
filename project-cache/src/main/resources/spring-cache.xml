@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/jms 
+                           http://www.springframework.org/schema/jms/spring-jms.xsd
+                           http://www.springframework.org/schema/aop
+         				   http://www.springframework.org/schema/aop/spring-aop.xsd
+     					   http://www.springframework.org/schema/tx
+        				   http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://activemq.apache.org/schema/core 
+                           http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+	<context:annotation-config />
+
+	<aop:aspectj-autoproxy />
+
+	<!-- jedis 的配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- #最大分配的对象数 -->
+		<property name="maxTotal" value="${jedis.jedisPoolConfig.maxTotal}" />
+		<!-- 最大能够保持idel状态的对象数 -->
+		<property name="maxIdle" value="${jedis.jedisPoolConfig.maxIdle}" />
+		<!-- 当调用borrow Object方法时，是否进行有效性检查 -->
+		<property name="testOnBorrow" value="${jedis.jedisPoolConfig.testOnBorrow}" />
+		<property name="testOnReturn" value="${jedis.jedisPoolConfig.testOnReturn}" />
+	</bean>
+	<!-- final Config poolConfig, final String host, int port,int timeout, final 
+		String password -->
+	<bean id="jedis_shardInfo_slave1" class="redis.clients.jedis.JedisShardInfo">
+		<!-- <property name="password" value="iP66952155" /> -->
+		<constructor-arg index="0"
+			value="${jedis.JedisShardInfo.slave1.host}" />
+		<constructor-arg index="1"
+			value="${jedis.JedisShardInfo.slave1.port}" />
+		<constructor-arg index="2"
+			value="${jedis.JedisShardInfo.slave1.timeout}" />
+		<constructor-arg index="3" value="instance:1" />
+	</bean>
+
+	<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1">
+			<list>
+				<ref bean="jedis_shardInfo_slave1" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="jdkSerializer"
+		class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+
+
+	<bean id="redisConfigProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:redis.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="redisPropertyConfigurer"
+		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="properties" ref="redisConfigProperties" />
+	</bean>
+
+</beans>  

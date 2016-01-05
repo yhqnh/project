@@ -1,0 +1,7 @@
+include "project-app"
+include "project-communications"
+include "project-dal"
+include "project-service"
+include "project-cache"
+
+rootProject.name = 'project'

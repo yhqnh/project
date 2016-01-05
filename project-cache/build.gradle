@@ -1,0 +1,6 @@
+dependencies {
+	compile 'org.springframework.data:spring-data-redis:1.6.0.RELEASE'
+	compile 'redis.clients:jedis:2.7.3'
+	compile 'cglib:cglib:3.2.0'
+	compile 'cglib:cglib-nodep:3.2.0'
+}
