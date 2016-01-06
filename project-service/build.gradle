@@ -1,17 +1,20 @@
-buildscript {
-   repositories {
-      maven {
-         url 'https://repo.zeroc.com/nexus/content/repositories/releases'
-      }
-   }
-   dependencies {
-      classpath group: 'com.zeroc.gradle.ice-builder', name: 'slice', version: '1.0.5'
-   }
-}
-
 apply plugin: 'slice'
 
+buildscript {
+	repositories { maven { url 'https://repo.zeroc.com/nexus/content/repositories/releases'
+		} }
+	dependencies {
+		classpath group: 'com.zeroc.gradle.ice-builder', name: 'slice', version: '1.0.5'
+	}
+}
+
+slice {
+	iceHome = "D:/ProgramFiles/ZeroC/Ice-3.6.1"
+	output = file("src/main/generated-src")
+	java { args = "--tie" }
+}
+
 dependencies {
-   compile project(':project-dal')
-   compile 'com.zeroc:ice:3.6.1'
+	compile project(':project-dal')
+	compile 'com.zeroc:ice:3.6.1'
 }
