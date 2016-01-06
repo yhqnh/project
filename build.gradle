@@ -9,7 +9,7 @@ allprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
-	
+
 	sourceCompatibility = 1.7
 	targetCompatibility = 1.7
 
@@ -21,6 +21,10 @@ allprojects {
 		maven {
 			name 'companyMaven'
 			url "http://121.40.119.240:8081/nexus/content/groups/public/"
+		}
+		maven {
+			name 'ice'
+			url "https://repo.zeroc.com/nexus/content/groups/public/"
 		}
 		mavenCentral()
 		jcenter()
