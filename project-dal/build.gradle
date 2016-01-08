@@ -4,11 +4,6 @@ sourceSets {
 			srcDirs = ['src/main/resources','src/main/java/com/project/dal/mapper']
 		}
 	}
-	test {
-		resources {
-			srcDirs = ['src/main/resources','src/main/java/com/project/dal/mapper']
-		}
-	}
 }
 
 dependencies {
