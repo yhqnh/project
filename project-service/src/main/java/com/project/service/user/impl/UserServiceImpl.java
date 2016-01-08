@@ -12,8 +12,8 @@ import Ice.Current;
 import com.project.dao.UserDao;
 import com.project.domain.User;
 import com.project.service.user.UserService;
-import com.project.slice.User.UserDto;
-import com.project.slice.User._UserSliceDisp;
+import com.project.slice.user.UserDto;
+import com.project.slice.user._UserSliceDisp;
 
 @Service
 @Slf4j

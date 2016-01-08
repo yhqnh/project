@@ -1,7 +1,8 @@
 package com.project.service.user.impl;
 
-import com.project.slice.User.UserSlicePrx;
-import com.project.slice.User.UserSlicePrxHelper;
+import com.project.slice.user.UserSlicePrx;
+import com.project.slice.user.UserSlicePrxHelper;
+
 
 
 public class Client {
