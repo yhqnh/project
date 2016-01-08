@@ -1,6 +1,6 @@
 package com.project.service.user;
 
-import com.project.domain.User;
+import com.project.dal.domain.User;
 import com.project.service.BaseService;
 
 public interface UserService extends BaseService {

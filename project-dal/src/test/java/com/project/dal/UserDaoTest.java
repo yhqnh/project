@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.ShardedJedisPool;
 
 import com.github.pagehelper.PageHelper;
-import com.project.dao.UserDao;
-import com.project.domain.User;
+import com.project.dal.UserDao;
+import com.project.dal.domain.User;
 
 @Slf4j
 public class UserDaoTest extends AbstractTest {
@@ -32,8 +32,8 @@ public class UserDaoTest extends AbstractTest {
 //		}
 		
 
-		PageHelper.startPage(1, 5);
-		List<User> testList1 = userDao.selectAll();
+//		PageHelper.startPage(1, 5);
+//		List<User> testList1 = userDao.selectAll();
 //		List<User> testList2 = userDao.selectAll();
 
 //		new Thread(new Runnable() {
