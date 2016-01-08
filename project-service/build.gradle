@@ -1,4 +1,4 @@
 dependencies {
 	compile project(':project-dal')
-	compile project(':project-serve')
+	compile project(':project-api')
 }

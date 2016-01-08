@@ -12,7 +12,7 @@
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${catalina.home}/logs/project-dal_%d{yyyy-MM-dd}.log
+			<fileNamePattern>./logs/project-dal_%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>7</maxHistory>
 		</rollingPolicy>

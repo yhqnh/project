@@ -1,12 +1,12 @@
-package com.project.dao.impl;
+package com.project.dal.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.project.cache.annotation.HashCacheable;
-import com.project.dao.UserDao;
-import com.project.domain.User;
+import com.project.dal.UserDao;
+import com.project.dal.domain.User;
 
 @Repository
 public class UserDaoImpl extends AbstractSessionFactory implements UserDao {

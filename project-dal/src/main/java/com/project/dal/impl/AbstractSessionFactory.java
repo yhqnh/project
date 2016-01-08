@@ -1,4 +1,4 @@
-package com.project.dao.impl;
+package com.project.dal.impl;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;

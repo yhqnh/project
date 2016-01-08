@@ -1,4 +1,4 @@
-package com.project.domain;
+package com.project.dal.domain;
 
 import java.io.Serializable;
 

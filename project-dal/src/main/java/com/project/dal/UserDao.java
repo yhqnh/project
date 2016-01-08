@@ -1,8 +1,8 @@
-package com.project.dao;
+package com.project.dal;
 
 import java.util.List;
 
-import com.project.domain.User;
+import com.project.dal.domain.User;
 
 
 public interface UserDao {

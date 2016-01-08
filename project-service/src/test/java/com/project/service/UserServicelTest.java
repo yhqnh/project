@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.Gson;
-import com.project.domain.User;
+import com.project.dal.domain.User;
 import com.project.service.user.UserService;
 
 @Slf4j

@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import Ice.Current;
 
-import com.project.dao.UserDao;
-import com.project.domain.User;
+import com.project.api.slice.user.UserDto;
+import com.project.api.slice.user._UserSliceDisp;
+import com.project.dal.UserDao;
+import com.project.dal.domain.User;
 import com.project.service.user.UserService;
-import com.project.slice.user.UserDto;
-import com.project.slice.user._UserSliceDisp;
 
 @Service
 @Slf4j

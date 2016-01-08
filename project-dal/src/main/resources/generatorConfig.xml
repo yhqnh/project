@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry location="V:\mysql-connector-java-5.1.37.jar" />
+	<classPathEntry location="D:\ChromeDownload\mysql-connector-java-5.0.8\mysql-connector-java-5.0.8-bin.jar" />
 	<context id="context1" targetRuntime="MyBatis3Simple">
 
 		<property name="javaFileEncoding" value="UTF-8" />
 
 		<commentGenerator>
 			<!-- suppressAllComments设置为true代码会重复 -->
-			<property name="suppressAllComments" value="true" />
+			<property name="suppressAllComments" value="false" />
 			<property name="suppressDate" value="true" />
 		</commentGenerator>
 
@@ -22,7 +22,7 @@
 		<sqlMapGenerator targetPackage="mybatis.gen.mapper"
 			targetProject="project-dal" />
 			
-		<javaClientGenerator targetPackage="mybatis.gen.dao"
+		<javaClientGenerator targetPackage="mybatis.gen.dal"
 			targetProject="project-dal" type="XMLMAPPER" implementationPackage="com.test"/>
 		<!-- <table schema="project" tableName="test"> <columnOverride column="???" 
 			property="???" /> </table> -->

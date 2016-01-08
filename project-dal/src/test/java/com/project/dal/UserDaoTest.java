@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.ShardedJedisPool;
 
 import com.github.pagehelper.PageHelper;
-import com.project.dao.UserDao;
-import com.project.domain.User;
+import com.project.dal.UserDao;
+import com.project.dal.domain.User;
 
 @Slf4j
 public class UserDaoTest extends AbstractTest {
