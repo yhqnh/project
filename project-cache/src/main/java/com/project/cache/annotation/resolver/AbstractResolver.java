@@ -24,41 +24,41 @@ public abstract class AbstractResolver {
 	 * @param returnType
 	 * @return 0:string,int,long,float,double,boolean,byte 1:其他
 	 */
-	protected int getReturnType(Class returnClass) {
-		
+	protected Integer getReturnType(Class returnClass) {
+
 		String simpleName = returnClass.getSimpleName();
-		if(simpleName.equals("String")){
+		if (simpleName.equals("String")) {
 			return 0;
 		}
-		
-		if(simpleName.equals("int") || simpleName.equals("Integer")){
+
+		if (simpleName.equals("int") || simpleName.equals("Integer")) {
 			return 0;
 		}
-		
-		if(simpleName.equals("long") || simpleName.equals("Long")){
+
+		if (simpleName.equals("long") || simpleName.equals("Long")) {
 			return 0;
 		}
-		
-		if(simpleName.equals("float") || simpleName.equals("Float")){
+
+		if (simpleName.equals("float") || simpleName.equals("Float")) {
 			return 0;
 		}
-		
-		if(simpleName.equals("double") || simpleName.equals("Double")){
+
+		if (simpleName.equals("double") || simpleName.equals("Double")) {
 			return 0;
 		}
-		
-		if(simpleName.equals("boolean") || simpleName.equals("Boolean")){
+
+		if (simpleName.equals("boolean") || simpleName.equals("Boolean")) {
 			return 0;
 		}
-		
-		if(simpleName.equals("byte") || simpleName.equals("Byte")){
+
+		if (simpleName.equals("byte") || simpleName.equals("Byte")) {
 			return 0;
 		}
-		
-		if(simpleName.equals("char")){
+
+		if (simpleName.equals("char")) {
 			return 0;
 		}
-		
+
 		return 1;
 	}
 
@@ -75,7 +75,8 @@ public abstract class AbstractResolver {
 		}
 		Method method = null;
 		try {
-			method = pjp.getTarget().getClass().getMethod(pjp.getSignature().getName(), argTypes);
+			method = pjp.getTarget().getClass()
+					.getMethod(pjp.getSignature().getName(), argTypes);
 		} catch (NoSuchMethodException e) {
 			log.error("NoSuchMethodException", e);
 		} catch (SecurityException e) {
@@ -90,16 +91,16 @@ public abstract class AbstractResolver {
 	 * @param pjp
 	 * @return
 	 */
-	protected String parseKey(String key, Method method, Object[] args) {
+	protected String parseSpel(String spel, Method method, Object[] args) {
 
-		if (StringUtils.isEmpty(key)) {
-			return key;
+		if (StringUtils.isEmpty(spel)) {
+			return spel;
 		}
 
-		if(!key.startsWith("#")){
-			return key;
+		if (!spel.startsWith("#")) {
+			return spel;
 		}
-		
+
 		// 获取被阻碍办法参数名列表(应用Spring支撑类库)
 		LocalVariableTableParameterNameDiscoverer discover = new LocalVariableTableParameterNameDiscoverer();
 
@@ -113,9 +114,13 @@ public abstract class AbstractResolver {
 
 		// 把办法参数放入SPEL高低文中
 		for (int i = 0; i < paraNameArr.length; i++) {
-			context.setVariable(paraNameArr[i], args[i]);
-			return parser.parseExpression(key).getValue(context, String.class);
+			if (getReturnType(method.getReturnType()).compareTo(1) == 0) {
+				context.setVariable(paraNameArr[i], args[i]);
+			} else {
+				context.setRootObject(args[i]);
+			}
+			return parser.parseExpression(spel).getValue(context, String.class);
 		}
-		return parser.parseExpression(key).getValue(String.class);
+		return parser.parseExpression(spel).getValue(String.class);
 	}
 }

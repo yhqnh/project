@@ -76,8 +76,8 @@ public class HashResolver extends AbstractSimpleResolver{
 		
 		CachePara cachePara = new CachePara();
 		HashCacheable cache = method.getAnnotation(HashCacheable.class);
-		String key = parseKey(cache.key(), method, pjp.getArgs());
-		String filed = parseKey(cache.field(), method, pjp.getArgs());
+		String key = parseSpel(cache.key(), method, pjp.getArgs());
+		String filed = parseSpel(cache.field(), method, pjp.getArgs());
 		int expire = cache.expire();
 		
 		cachePara.setObjectKey(key);
