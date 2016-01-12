@@ -3,6 +3,7 @@ include "project-api"
 include "project-dal"
 include "project-service"
 include "project-cache"
+include "project-common"
 
 rootProject.name = 'project'
 
