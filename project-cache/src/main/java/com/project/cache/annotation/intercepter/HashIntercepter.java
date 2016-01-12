@@ -4,10 +4,6 @@ import java.lang.reflect.Method;
 
 import javax.annotation.Resource;
 
-import com.project.cache.annotation.HashCacheEvict;
-import com.project.cache.annotation.HashCachePut;
-import com.project.cache.factory.CacheProxy;
-import com.project.cache.factory.ProxyTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,8 +13,11 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.project.cache.annotation.HashCacheEvict;
+import com.project.cache.annotation.HashCachePut;
 import com.project.cache.annotation.HashCacheable;
-import com.project.cache.factory.HashCacheProxy;
+import com.project.cache.factory.CacheProxy;
+import com.project.cache.factory.ProxyTypeEnum;
 import com.project.cache.support.CachePara;
 
 /**
@@ -39,7 +38,7 @@ public class HashIntercepter extends AbstractHashIntercepter {
      */
     @Around(value = "@annotation(com.project.cache.annotation.HashCacheable)")
     public Object hashCacheable(ProceedingJoinPoint pjp) throws Throwable {
-        CachePara cachePara = getCacheableParam(pjp);
+        CachePara cachePara = getCacheablePara(pjp);
         cacheProxy.create(cachePara);
         return cacheProxy.cacheAbled(cachePara);
     }
@@ -50,7 +49,7 @@ public class HashIntercepter extends AbstractHashIntercepter {
     @Around(value = "@annotation(com.project.cache.annotation.HashCacheEvict)")
     public Object hashCacheEvict(ProceedingJoinPoint pjp) throws Throwable {
 
-        CachePara cachePara = getCacheEvictParam(pjp);
+        CachePara cachePara = getCacheEvictPara(pjp);
         cacheProxy.create(cachePara);
         return cacheProxy.cacheEvict(cachePara);
     }
@@ -60,13 +59,13 @@ public class HashIntercepter extends AbstractHashIntercepter {
      */
     @Around(value = "@annotation(com.project.cache.annotation.HashCachePut)")
     public Object hashCachePut(ProceedingJoinPoint pjp) throws Throwable {
-        CachePara cachePara = getCachePutParam(pjp);
+        CachePara cachePara = getCachePutPara(pjp);
         cacheProxy.create(cachePara);
         return cacheProxy.cachePut(cachePara);
     }
 
 
-    private CachePara getCacheableParam(ProceedingJoinPoint pjp) {
+    private CachePara getCacheablePara(ProceedingJoinPoint pjp) {
 
         Method method = getMethod(pjp);
         if (StringUtils.isEmpty(method)) {
@@ -91,7 +90,7 @@ public class HashIntercepter extends AbstractHashIntercepter {
     }
 
 
-    private CachePara getCachePutParam(ProceedingJoinPoint pjp) {
+    private CachePara getCachePutPara(ProceedingJoinPoint pjp) {
 
         Method method = getMethod(pjp);
         if (StringUtils.isEmpty(method)) {
@@ -116,7 +115,7 @@ public class HashIntercepter extends AbstractHashIntercepter {
     }
 
 
-    private CachePara getCacheEvictParam(ProceedingJoinPoint pjp) {
+    private CachePara getCacheEvictPara(ProceedingJoinPoint pjp) {
 
         Method method = getMethod(pjp);
         if (StringUtils.isEmpty(method)) {

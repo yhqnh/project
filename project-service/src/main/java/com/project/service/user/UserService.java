@@ -7,5 +7,5 @@ public interface UserService extends BaseService {
 
 	public User selectByPrimaryKey(Long id);
 	
-	public int updateByPrimaryKey(User user);
+	public User updateByPrimaryKey(User user);
 }

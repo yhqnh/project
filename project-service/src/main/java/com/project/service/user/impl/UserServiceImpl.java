@@ -28,8 +28,8 @@ public class UserServiceImpl extends _UserSliceDisp implements UserService {
 		return user;
 	}
 
-	public int updateByPrimaryKey(User user) {
-		int result = userDao.updateByPrimaryKey(user);
+	public User updateByPrimaryKey(User user) {
+		User result = userDao.updateByPrimaryKey(user);
 		return result;
 	}
 	

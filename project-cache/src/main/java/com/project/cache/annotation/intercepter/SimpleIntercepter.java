@@ -4,20 +4,18 @@ import java.lang.reflect.Method;
 
 import javax.annotation.Resource;
 
-import com.project.cache.annotation.SimpleCacheEvict;
-import com.project.cache.annotation.SimpleCachePut;
 import lombok.extern.slf4j.Slf4j;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.project.cache.annotation.SimpleCacheEvict;
+import com.project.cache.annotation.SimpleCachePut;
 import com.project.cache.annotation.SimpleCacheable;
-import com.project.cache.factory.Cache;
-import com.project.cache.factory.SimpleCacheProxy;
+import com.project.cache.factory.CacheProxy;
 import com.project.cache.support.CachePara;
 
 /**
@@ -30,17 +28,15 @@ import com.project.cache.support.CachePara;
 public class SimpleIntercepter extends AbstractSimpleIntercepter {
 
 	@Resource
-	SimpleCacheProxy cacheProxy;
+	CacheProxy cacheProxy;
 
 	/**
 	 * 缓存新增
 	 */
 	@Around(value = "@annotation(com.project.cache.annotation.SimpleCacheable)")
 	public Object simpleCacheable(ProceedingJoinPoint pjp) throws Throwable {
-
 		CachePara cachePara = getCacheablePara(pjp);
-		Class returnClass = ((MethodSignature) pjp.getSignature()).getReturnType();
-		cacheProxy.create(returnClass);
+		cacheProxy.create(cachePara);
 		return cacheProxy.cacheAbled(cachePara);
 	}
 
@@ -48,39 +44,35 @@ public class SimpleIntercepter extends AbstractSimpleIntercepter {
 	 * 缓存清除
 	 */
 	@Around(value = "@annotation(com.project.cache.annotation.SimpleCacheEvict)")
-	public Object simpleCacheEvict(ProceedingJoinPoint pjp) throws Throwable{
-
+	public Object simpleCacheEvict(ProceedingJoinPoint pjp) throws Throwable {
 		CachePara cachePara = getCacheEvictPara(pjp);
-		Class returnClass = ((MethodSignature) pjp.getSignature()).getReturnType();
-		cacheProxy.create(returnClass);
+		cacheProxy.create(cachePara);
 		return cacheProxy.cacheEvict(cachePara);
 	}
-	
+
 	/**
 	 * 缓存更新
 	 */
 	@Around(value = "@annotation(com.project.cache.annotation.SimpleCachePut)")
-	public Object simpleCachePut(ProceedingJoinPoint pjp) throws Throwable{
+	public Object simpleCachePut(ProceedingJoinPoint pjp) throws Throwable {
 		CachePara cachePara = getCachePutPara(pjp);
-		Class returnClass = ((MethodSignature) pjp.getSignature()).getReturnType();
-		cacheProxy.create(returnClass);
+		cacheProxy.create(cachePara);
 		return cacheProxy.cachePut(cachePara);
 	}
-	
-	
-	private CachePara getCacheablePara(ProceedingJoinPoint pjp){
-		
+
+	private CachePara getCacheablePara(ProceedingJoinPoint pjp) {
+
 		Method method = getMethod(pjp);
-		if(StringUtils.isEmpty(method)){
+		if (StringUtils.isEmpty(method)) {
 			return null;
 		}
-		
+
 		CachePara cachePara = new CachePara();
 		SimpleCacheable cache = method.getAnnotation(SimpleCacheable.class);
 		String key = parseOgnl(cache.key(), method, pjp.getArgs());
 		int expire = cache.expire();
 		boolean serializable = cache.serializable();
-		
+
 		cachePara.setObjectKey(key);
 		cachePara.setExpire(expire);
 		cachePara.setPjp(pjp);
@@ -88,11 +80,10 @@ public class SimpleIntercepter extends AbstractSimpleIntercepter {
 		return cachePara;
 	}
 
-
-	private CachePara getCachePutPara(ProceedingJoinPoint pjp){
+	private CachePara getCachePutPara(ProceedingJoinPoint pjp) {
 
 		Method method = getMethod(pjp);
-		if(StringUtils.isEmpty(method)){
+		if (StringUtils.isEmpty(method)) {
 			return null;
 		}
 
@@ -109,11 +100,10 @@ public class SimpleIntercepter extends AbstractSimpleIntercepter {
 		return cachePara;
 	}
 
-
-	private CachePara getCacheEvictPara(ProceedingJoinPoint pjp){
+	private CachePara getCacheEvictPara(ProceedingJoinPoint pjp) {
 
 		Method method = getMethod(pjp);
-		if(StringUtils.isEmpty(method)){
+		if (StringUtils.isEmpty(method)) {
 			return null;
 		}
 
