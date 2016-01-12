@@ -22,5 +22,7 @@ public @interface HashCachePut {
 
 	String field();
 
+	boolean serializable() default false;
+
     int expire() default -1;
 }

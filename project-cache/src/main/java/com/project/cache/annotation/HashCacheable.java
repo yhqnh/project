@@ -22,5 +22,7 @@ public @interface HashCacheable {
 
     String field();
 
+    boolean serializable() default false;
+
     int expire() default -1;
 }

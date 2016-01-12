@@ -20,5 +20,7 @@ public @interface SimpleCacheable {
 
 	String key();
 
+    boolean serializable() default false;
+
     int expire() default -1;
 }

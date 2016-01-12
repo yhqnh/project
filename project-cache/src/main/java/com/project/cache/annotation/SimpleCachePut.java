@@ -20,5 +20,7 @@ public @interface SimpleCachePut {
 
 	String key();
 
+	boolean serializable() default false;
+
 	int expire() default -1;
 }

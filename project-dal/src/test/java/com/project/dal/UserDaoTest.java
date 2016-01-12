@@ -25,7 +25,7 @@ public class UserDaoTest extends AbstractTest {
 	@Test
 	public void test() throws InterruptedException {
 
-//		for (int i = 0; i < 100000; i++) {
+//		for (int i = 0; i < 2; i++) {
 //			User insertUser = new User();
 //			insertUser.setLoginName("test");
 //			userDao.insert(insertUser);
@@ -53,8 +53,14 @@ public class UserDaoTest extends AbstractTest {
 //			}
 //		}).start();
 		
-		User user = userDao.selectByPrimaryKey(2L);
-		log.info(user.getLoginName());
+//		User user = userDao.selectByPrimaryKey(2L);
+//		log.info(user.getLoginName());
+
+		User user = new User();
+		user.setId(2L);
+//		user.setLoginName("logs");
+
+		userDao.updateByPrimaryKey(user);
 	}
 
 }

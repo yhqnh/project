@@ -3,4 +3,6 @@ dependencies {
 	compile 'redis.clients:jedis:2.7.3'
 	compile 'cglib:cglib:3.2.0'
 	compile 'cglib:cglib-nodep:3.2.0'
+	compile 'ognl:ognl:3.1.2'
+	compile 'org.javassist:javassist:3.20.0-GA'
 }
