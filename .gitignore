@@ -33,6 +33,7 @@ gradle-app.setting
 .classpath
 .project
 .settings/
+.metadata
 
 # IDEA artifacts and output dirs
 *.iml
