@@ -1,6 +1,6 @@
 package com.project.cache.support;
 
-import com.project.cache.factory.ProxyTypeEnum;
+import com.project.cache.proxy.ProxyTypeEnum;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 public class CachePara {
@@ -59,11 +59,11 @@ public class CachePara {
 		this.expire = expire;
 	}
 
-	public com.project.cache.factory.ProxyTypeEnum getProxyTypeEnum() {
+	public com.project.cache.proxy.ProxyTypeEnum getProxyTypeEnum() {
 		return ProxyTypeEnum;
 	}
 
-	public void setProxyTypeEnum(com.project.cache.factory.ProxyTypeEnum proxyTypeEnum) {
+	public void setProxyTypeEnum(com.project.cache.proxy.ProxyTypeEnum proxyTypeEnum) {
 		ProxyTypeEnum = proxyTypeEnum;
 	}
 

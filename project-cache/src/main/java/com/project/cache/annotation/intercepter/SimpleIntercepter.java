@@ -4,18 +4,20 @@ import java.lang.reflect.Method;
 
 import javax.annotation.Resource;
 
+import com.project.cache.proxy.ProxyTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.project.cache.annotation.SimpleCacheEvict;
 import com.project.cache.annotation.SimpleCachePut;
 import com.project.cache.annotation.SimpleCacheable;
-import com.project.cache.factory.CacheProxy;
+import com.project.cache.proxy.CacheProxy;
 import com.project.cache.support.CachePara;
 
 /**
@@ -68,6 +70,8 @@ public class SimpleIntercepter extends AbstractSimpleIntercepter {
 		}
 
 		CachePara cachePara = new CachePara();
+		init(cachePara, pjp);
+
 		SimpleCacheable cache = method.getAnnotation(SimpleCacheable.class);
 		String key = parseOgnl(cache.key(), method, pjp.getArgs());
 		int expire = cache.expire();
@@ -88,6 +92,8 @@ public class SimpleIntercepter extends AbstractSimpleIntercepter {
 		}
 
 		CachePara cachePara = new CachePara();
+		init(cachePara, pjp);
+
 		SimpleCachePut cache = method.getAnnotation(SimpleCachePut.class);
 		String key = parseOgnl(cache.key(), method, pjp.getArgs());
 		int expire = cache.expire();
@@ -108,11 +114,19 @@ public class SimpleIntercepter extends AbstractSimpleIntercepter {
 		}
 
 		CachePara cachePara = new CachePara();
+		init(cachePara, pjp);
+
 		SimpleCacheEvict cache = method.getAnnotation(SimpleCacheEvict.class);
 		String key = parseOgnl(cache.key(), method, pjp.getArgs());
 
 		cachePara.setObjectKey(key);
 		cachePara.setPjp(pjp);
 		return cachePara;
+	}
+
+	private void init(CachePara cachePara, ProceedingJoinPoint pjp){
+		Class returnClass = ((MethodSignature) pjp.getSignature()).getReturnType();
+		cachePara.setReturnClass(returnClass);
+		cachePara.setProxyTypeEnum(ProxyTypeEnum.SIMPLE);
 	}
 }

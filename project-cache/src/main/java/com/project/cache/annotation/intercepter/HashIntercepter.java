@@ -16,8 +16,8 @@ import org.springframework.util.StringUtils;
 import com.project.cache.annotation.HashCacheEvict;
 import com.project.cache.annotation.HashCachePut;
 import com.project.cache.annotation.HashCacheable;
-import com.project.cache.factory.CacheProxy;
-import com.project.cache.factory.ProxyTypeEnum;
+import com.project.cache.proxy.CacheProxy;
+import com.project.cache.proxy.ProxyTypeEnum;
 import com.project.cache.support.CachePara;
 
 /**

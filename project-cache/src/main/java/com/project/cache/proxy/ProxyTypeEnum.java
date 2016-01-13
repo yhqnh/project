@@ -1,4 +1,4 @@
-package com.project.cache.factory;
+package com.project.cache.proxy;
 
 /**
  * Created by yanghuqiang(yhqnh@aliyun.com) on 2016/1/11.

@@ -1,13 +1,12 @@
 package com.project.cache.simple;
 
-import com.project.cache.BaseCache;
 import com.project.cache.BooleanCache;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.project.cache.factory.Cache;
+import com.project.cache.proxy.Cache;
 import com.project.cache.support.CachePara;
 
 @Component

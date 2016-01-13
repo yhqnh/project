@@ -1,4 +1,4 @@
-package com.project.cache.factory;
+package com.project.cache.proxy;
 
 import com.project.cache.support.CachePara;
 

@@ -1,4 +1,4 @@
-package com.project.cache.factory;
+package com.project.cache.proxy;
 
 import com.project.cache.hash.*;
 import com.project.cache.simple.*;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class CacheProxy {
 
-    protected ThreadLocal<Cache> cache;
+    protected ThreadLocal<Cache> cache = new ThreadLocal<Cache>();
 
     @Autowired
     private HashStringCache hashStringCacher;
@@ -84,6 +84,7 @@ public class CacheProxy {
         } else {
             createSimpleCache(cachePara);
         }
+        log.info("current cache:{}", cache.get());
     }
 
     public void createHashCache(CachePara cachePara) {
@@ -164,13 +165,42 @@ public class CacheProxy {
 
     protected Object getFormCache(CachePara cachePara) {
         String key = (String) cachePara.getObjectKey();
+        String filed = (String) cachePara.getObjectField();
         Object fromCache = null;
         if (cachePara.isSerializable()) {
-            fromCache = template.get(defaultSerializer.serialize(key));
+            if (cachePara.ProxyTypeEnum.equals(ProxyTypeEnum.HASH)) {
+                fromCache = template.hget(defaultSerializer.serialize(key), defaultSerializer.serialize(filed));
+            } else {
+                fromCache = template.get(defaultSerializer.serialize(key));
+            }
         } else {
-            fromCache = template.get(key);
+            if (cachePara.ProxyTypeEnum.equals(ProxyTypeEnum.HASH)) {
+                fromCache = template.hget(key, filed);
+            } else {
+                fromCache = template.get(key);
+            }
         }
         return fromCache;
+    }
+
+    protected boolean exists(CachePara cachePara) {
+        String key = (String) cachePara.getObjectKey();
+        String filed = (String) cachePara.getObjectField();
+        boolean result = false;
+        if (cachePara.isSerializable()) {
+            if (cachePara.ProxyTypeEnum.equals(ProxyTypeEnum.HASH)) {
+                result = template.hexists(defaultSerializer.serialize(key), defaultSerializer.serialize(filed));
+            } else {
+                result = template.exists(defaultSerializer.serialize(key));
+            }
+        } else {
+            if (cachePara.ProxyTypeEnum.equals(ProxyTypeEnum.HASH)) {
+                result = template.hexists(key, filed);
+            } else {
+                result = template.exists(key);
+            }
+        }
+        return result;
     }
 
     public Object cacheAbled(CachePara cachePara) throws Throwable {
@@ -209,7 +239,12 @@ public class CacheProxy {
     }
 
     public Object cachePut(CachePara cachePara) throws Throwable {
-        return cacheAbled(cachePara);
+        boolean exists = exists(cachePara);
+        Object result = cachePara.getPjp().proceed();
+        if (exists) {
+            cache.get().putValue2Cache(cachePara, result);
+        }
+        return result;
     }
 
 }

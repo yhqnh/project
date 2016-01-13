@@ -1,5 +1,6 @@
 package com.project.cache;
 
+import com.google.gson.Gson;
 import com.project.cache.support.CachePara;
 
 /**
@@ -14,6 +15,7 @@ public class ObjectCache extends BaseCache {
         } else {
             result = fromCache;
         }
+        result = new Gson().fromJson((String)result,cachePara.getReturnClass());
         return result;
     }
 }
