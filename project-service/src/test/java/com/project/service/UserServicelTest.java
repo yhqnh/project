@@ -21,7 +21,7 @@ public class UserServicelTest extends AbstractTest {
 
 		User user = userService.selectByPrimaryKey(1L);
 		log.info("user name {}", user.getLoginName());
-		user.setLoginName("5555");
+		user.setLoginName("666");
 		userService.updateByPrimaryKey(user);
 
 		User user2 = userService.selectByPrimaryKey(1L);

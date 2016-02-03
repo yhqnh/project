@@ -1,12 +1,12 @@
+#pragma
 [["java:package:com.project.api.slice"]]
 module common {
-
 	class SimpleResponse {
-	   	bool success;
+	   	bool success = true;
 	   	string message;
 	};
 
-	class BussinessResponse {
+	class BussinessResponse extends SimpleResponse{
 	    string jsonObject;
 	};
 };

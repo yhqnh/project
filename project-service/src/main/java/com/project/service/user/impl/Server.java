@@ -1,9 +1,15 @@
 package com.project.service.user.impl;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Server {
 	public static void main(String[] args) {
+
 		int status = 0;
 		Ice.Communicator ic = null;
 		try {
+			log.info("args is:{}", args);
 			ic = Ice.Util.initialize(args);
 			Ice.ObjectAdapter adapter = ic.createObjectAdapterWithEndpoints("SimplePrinterAdapter", "default -p 10000");
 			Ice.Object object = new UserServiceImpl();

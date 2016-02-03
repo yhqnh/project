@@ -19,9 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServant implements IceBox.Service {
 
-    @Autowired
-    private UserDao userDao;
-
     private Ice.ObjectAdapter _adapter;
 
     @Override
@@ -34,30 +31,5 @@ public class UserServant implements IceBox.Service {
     @Override
     public void stop() {
         _adapter.destroy();
-    }
-
-    public User selectByPrimaryKey(Long id) {
-        User user = userDao.selectByPrimaryKey(id);
-        return user;
-    }
-
-    public User updateByPrimaryKey(UserDto userDto,Current __current) {
-        User user = new User();
-        BeanUtils.copyProperties(userDto, user);
-        User result = userDao.updateByPrimaryKey(user);
-        return result;
-    }
-
-    public UserDto getUserInfoByPeimaryKey(long id, Current __current) {
-        log.info("id:" + id);
-        User user = userDao.selectByPrimaryKey(id);
-//		User user = new User();
-        user.setId(1L);
-        user.setLoginName("yyyyy");
-        UserDto userDto = new UserDto();
-        userDto.id = user.getId();
-        userDto.loginName = user.getLoginName();
-        log.info("userDto is :{}", new Gson().toJson(userDto));
-        return userDto;
     }
 }

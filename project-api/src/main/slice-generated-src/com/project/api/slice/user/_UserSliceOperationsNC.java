@@ -22,5 +22,7 @@ package com.project.api.slice.user;
 
 public interface _UserSliceOperationsNC
 {
-    UserDto getUserInfoByPeimaryKey(long id);
+    com.project.api.slice.common.BussinessResponse getUserInfoByPeimaryKey(long id);
+
+    UserDto updateByPeimaryKey(UserDto userDto);
 }

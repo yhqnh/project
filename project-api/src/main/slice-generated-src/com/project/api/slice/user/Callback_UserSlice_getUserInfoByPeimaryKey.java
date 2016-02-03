@@ -21,7 +21,7 @@
 package com.project.api.slice.user;
 
 public abstract class Callback_UserSlice_getUserInfoByPeimaryKey
-    extends IceInternal.TwowayCallback implements Ice.TwowayCallbackArg1<com.project.api.slice.user.UserDto>
+    extends IceInternal.TwowayCallback implements Ice.TwowayCallbackArg1<com.project.api.slice.common.BussinessResponse>
 {
     public final void __completed(Ice.AsyncResult __result)
     {

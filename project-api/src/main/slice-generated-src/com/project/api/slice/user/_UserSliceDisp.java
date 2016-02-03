@@ -70,9 +70,14 @@ public abstract class _UserSliceDisp extends Ice.ObjectImpl implements UserSlice
         return __ids[1];
     }
 
-    public final UserDto getUserInfoByPeimaryKey(long id)
+    public final com.project.api.slice.common.BussinessResponse getUserInfoByPeimaryKey(long id)
     {
         return getUserInfoByPeimaryKey(id, null);
+    }
+
+    public final UserDto updateByPeimaryKey(UserDto userDto)
+    {
+        return updateByPeimaryKey(userDto, null);
     }
 
     public static Ice.DispatchStatus ___getUserInfoByPeimaryKey(UserSlice __obj, IceInternal.Incoming __inS, Ice.Current __current)
@@ -82,7 +87,22 @@ public abstract class _UserSliceDisp extends Ice.ObjectImpl implements UserSlice
         long id;
         id = __is.readLong();
         __inS.endReadParams();
-        UserDto __ret = __obj.getUserInfoByPeimaryKey(id, __current);
+        com.project.api.slice.common.BussinessResponse __ret = __obj.getUserInfoByPeimaryKey(id, __current);
+        IceInternal.BasicStream __os = __inS.__startWriteParams(Ice.FormatType.DefaultFormat);
+        __os.writeObject(__ret);
+        __os.writePendingObjects();
+        __inS.__endWriteParams(true);
+        return Ice.DispatchStatus.DispatchOK;
+    }
+
+    public static Ice.DispatchStatus ___updateByPeimaryKey(UserSlice __obj, IceInternal.Incoming __inS, Ice.Current __current)
+    {
+        __checkMode(Ice.OperationMode.Normal, __current.mode);
+        IceInternal.BasicStream __is = __inS.startReadParams();
+        UserDto userDto = null;
+        userDto = UserDto.__read(__is, userDto);
+        __inS.endReadParams();
+        UserDto __ret = __obj.updateByPeimaryKey(userDto, __current);
         IceInternal.BasicStream __os = __inS.__startWriteParams(Ice.FormatType.DefaultFormat);
         UserDto.__write(__os, __ret);
         __inS.__endWriteParams(true);
@@ -95,7 +115,8 @@ public abstract class _UserSliceDisp extends Ice.ObjectImpl implements UserSlice
         "ice_id",
         "ice_ids",
         "ice_isA",
-        "ice_ping"
+        "ice_ping",
+        "updateByPeimaryKey"
     };
 
     public Ice.DispatchStatus __dispatch(IceInternal.Incoming in, Ice.Current __current)
@@ -127,6 +148,10 @@ public abstract class _UserSliceDisp extends Ice.ObjectImpl implements UserSlice
             case 4:
             {
                 return ___ice_ping(this, in, __current);
+            }
+            case 5:
+            {
+                return ___updateByPeimaryKey(this, in, __current);
             }
         }
 

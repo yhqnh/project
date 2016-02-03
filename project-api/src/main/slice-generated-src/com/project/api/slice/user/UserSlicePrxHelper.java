@@ -24,17 +24,17 @@ public final class UserSlicePrxHelper extends Ice.ObjectPrxHelperBase implements
 {
     private static final String __getUserInfoByPeimaryKey_name = "getUserInfoByPeimaryKey";
 
-    public UserDto getUserInfoByPeimaryKey(long id)
+    public com.project.api.slice.common.BussinessResponse getUserInfoByPeimaryKey(long id)
     {
         return getUserInfoByPeimaryKey(id, null, false);
     }
 
-    public UserDto getUserInfoByPeimaryKey(long id, java.util.Map<String, String> __ctx)
+    public com.project.api.slice.common.BussinessResponse getUserInfoByPeimaryKey(long id, java.util.Map<String, String> __ctx)
     {
         return getUserInfoByPeimaryKey(id, __ctx, true);
     }
 
-    private UserDto getUserInfoByPeimaryKey(long id, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    private com.project.api.slice.common.BussinessResponse getUserInfoByPeimaryKey(long id, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         __checkTwowayOnly(__getUserInfoByPeimaryKey_name);
         return end_getUserInfoByPeimaryKey(begin_getUserInfoByPeimaryKey(id, __ctx, __explicitCtx, true, null));
@@ -71,14 +71,14 @@ public final class UserSlicePrxHelper extends Ice.ObjectPrxHelperBase implements
     }
 
     public Ice.AsyncResult begin_getUserInfoByPeimaryKey(long id, 
-                                                         IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                         IceInternal.Functional_GenericCallback1<com.project.api.slice.common.BussinessResponse> __responseCb, 
                                                          IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb)
     {
         return begin_getUserInfoByPeimaryKey(id, null, false, false, __responseCb, __exceptionCb, null);
     }
 
     public Ice.AsyncResult begin_getUserInfoByPeimaryKey(long id, 
-                                                         IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                         IceInternal.Functional_GenericCallback1<com.project.api.slice.common.BussinessResponse> __responseCb, 
                                                          IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
                                                          IceInternal.Functional_BoolCallback __sentCb)
     {
@@ -87,7 +87,7 @@ public final class UserSlicePrxHelper extends Ice.ObjectPrxHelperBase implements
 
     public Ice.AsyncResult begin_getUserInfoByPeimaryKey(long id, 
                                                          java.util.Map<String, String> __ctx, 
-                                                         IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                         IceInternal.Functional_GenericCallback1<com.project.api.slice.common.BussinessResponse> __responseCb, 
                                                          IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb)
     {
         return begin_getUserInfoByPeimaryKey(id, __ctx, true, false, __responseCb, __exceptionCb, null);
@@ -95,7 +95,7 @@ public final class UserSlicePrxHelper extends Ice.ObjectPrxHelperBase implements
 
     public Ice.AsyncResult begin_getUserInfoByPeimaryKey(long id, 
                                                          java.util.Map<String, String> __ctx, 
-                                                         IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                         IceInternal.Functional_GenericCallback1<com.project.api.slice.common.BussinessResponse> __responseCb, 
                                                          IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
                                                          IceInternal.Functional_BoolCallback __sentCb)
     {
@@ -106,12 +106,12 @@ public final class UserSlicePrxHelper extends Ice.ObjectPrxHelperBase implements
                                                           java.util.Map<String, String> __ctx, 
                                                           boolean __explicitCtx, 
                                                           boolean __synchronous, 
-                                                          IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                          IceInternal.Functional_GenericCallback1<com.project.api.slice.common.BussinessResponse> __responseCb, 
                                                           IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
                                                           IceInternal.Functional_BoolCallback __sentCb)
     {
         return begin_getUserInfoByPeimaryKey(id, __ctx, __explicitCtx, __synchronous, 
-                                             new IceInternal.Functional_TwowayCallbackArg1<com.project.api.slice.user.UserDto>(__responseCb, __exceptionCb, __sentCb)
+                                             new IceInternal.Functional_TwowayCallbackArg1<com.project.api.slice.common.BussinessResponse>(__responseCb, __exceptionCb, __sentCb)
                                                  {
                                                      public final void __completed(Ice.AsyncResult __result)
                                                      {
@@ -143,9 +143,183 @@ public final class UserSlicePrxHelper extends Ice.ObjectPrxHelperBase implements
         return __result;
     }
 
-    public UserDto end_getUserInfoByPeimaryKey(Ice.AsyncResult __iresult)
+    public com.project.api.slice.common.BussinessResponse end_getUserInfoByPeimaryKey(Ice.AsyncResult __iresult)
     {
         IceInternal.OutgoingAsync __result = IceInternal.OutgoingAsync.check(__iresult, this, __getUserInfoByPeimaryKey_name);
+        try
+        {
+            if(!__result.__wait())
+            {
+                try
+                {
+                    __result.throwUserException();
+                }
+                catch(Ice.UserException __ex)
+                {
+                    throw new Ice.UnknownUserException(__ex.ice_name(), __ex);
+                }
+            }
+            IceInternal.BasicStream __is = __result.startReadParams();
+            com.project.api.slice.common.BussinessResponseHolder __ret = new com.project.api.slice.common.BussinessResponseHolder();
+            __is.readObject(__ret);
+            __is.readPendingObjects();
+            __result.endReadParams();
+            return __ret.value;
+        }
+        finally
+        {
+            if(__result != null)
+            {
+                __result.cacheMessageBuffers();
+            }
+        }
+    }
+
+    static public void __getUserInfoByPeimaryKey_completed(Ice.TwowayCallbackArg1<com.project.api.slice.common.BussinessResponse> __cb, Ice.AsyncResult __result)
+    {
+        com.project.api.slice.user.UserSlicePrx __proxy = (com.project.api.slice.user.UserSlicePrx)__result.getProxy();
+        com.project.api.slice.common.BussinessResponse __ret = null;
+        try
+        {
+            __ret = __proxy.end_getUserInfoByPeimaryKey(__result);
+        }
+        catch(Ice.LocalException __ex)
+        {
+            __cb.exception(__ex);
+            return;
+        }
+        catch(Ice.SystemException __ex)
+        {
+            __cb.exception(__ex);
+            return;
+        }
+        __cb.response(__ret);
+    }
+
+    private static final String __updateByPeimaryKey_name = "updateByPeimaryKey";
+
+    public UserDto updateByPeimaryKey(UserDto userDto)
+    {
+        return updateByPeimaryKey(userDto, null, false);
+    }
+
+    public UserDto updateByPeimaryKey(UserDto userDto, java.util.Map<String, String> __ctx)
+    {
+        return updateByPeimaryKey(userDto, __ctx, true);
+    }
+
+    private UserDto updateByPeimaryKey(UserDto userDto, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    {
+        __checkTwowayOnly(__updateByPeimaryKey_name);
+        return end_updateByPeimaryKey(begin_updateByPeimaryKey(userDto, __ctx, __explicitCtx, true, null));
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto)
+    {
+        return begin_updateByPeimaryKey(userDto, null, false, false, null);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, java.util.Map<String, String> __ctx)
+    {
+        return begin_updateByPeimaryKey(userDto, __ctx, true, false, null);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, Ice.Callback __cb)
+    {
+        return begin_updateByPeimaryKey(userDto, null, false, false, __cb);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, java.util.Map<String, String> __ctx, Ice.Callback __cb)
+    {
+        return begin_updateByPeimaryKey(userDto, __ctx, true, false, __cb);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, Callback_UserSlice_updateByPeimaryKey __cb)
+    {
+        return begin_updateByPeimaryKey(userDto, null, false, false, __cb);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, java.util.Map<String, String> __ctx, Callback_UserSlice_updateByPeimaryKey __cb)
+    {
+        return begin_updateByPeimaryKey(userDto, __ctx, true, false, __cb);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, 
+                                                    IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                    IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb)
+    {
+        return begin_updateByPeimaryKey(userDto, null, false, false, __responseCb, __exceptionCb, null);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, 
+                                                    IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                    IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
+                                                    IceInternal.Functional_BoolCallback __sentCb)
+    {
+        return begin_updateByPeimaryKey(userDto, null, false, false, __responseCb, __exceptionCb, __sentCb);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, 
+                                                    java.util.Map<String, String> __ctx, 
+                                                    IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                    IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb)
+    {
+        return begin_updateByPeimaryKey(userDto, __ctx, true, false, __responseCb, __exceptionCb, null);
+    }
+
+    public Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, 
+                                                    java.util.Map<String, String> __ctx, 
+                                                    IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                    IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
+                                                    IceInternal.Functional_BoolCallback __sentCb)
+    {
+        return begin_updateByPeimaryKey(userDto, __ctx, true, false, __responseCb, __exceptionCb, __sentCb);
+    }
+
+    private Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, 
+                                                     java.util.Map<String, String> __ctx, 
+                                                     boolean __explicitCtx, 
+                                                     boolean __synchronous, 
+                                                     IceInternal.Functional_GenericCallback1<UserDto> __responseCb, 
+                                                     IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
+                                                     IceInternal.Functional_BoolCallback __sentCb)
+    {
+        return begin_updateByPeimaryKey(userDto, __ctx, __explicitCtx, __synchronous, 
+                                        new IceInternal.Functional_TwowayCallbackArg1<com.project.api.slice.user.UserDto>(__responseCb, __exceptionCb, __sentCb)
+                                            {
+                                                public final void __completed(Ice.AsyncResult __result)
+                                                {
+                                                    UserSlicePrxHelper.__updateByPeimaryKey_completed(this, __result);
+                                                }
+                                            });
+    }
+
+    private Ice.AsyncResult begin_updateByPeimaryKey(UserDto userDto, 
+                                                     java.util.Map<String, String> __ctx, 
+                                                     boolean __explicitCtx, 
+                                                     boolean __synchronous, 
+                                                     IceInternal.CallbackBase __cb)
+    {
+        __checkAsyncTwowayOnly(__updateByPeimaryKey_name);
+        IceInternal.OutgoingAsync __result = getOutgoingAsync(__updateByPeimaryKey_name, __cb);
+        try
+        {
+            __result.prepare(__updateByPeimaryKey_name, Ice.OperationMode.Normal, __ctx, __explicitCtx, __synchronous);
+            IceInternal.BasicStream __os = __result.startWriteParams(Ice.FormatType.DefaultFormat);
+            UserDto.__write(__os, userDto);
+            __result.endWriteParams();
+            __result.invoke();
+        }
+        catch(Ice.Exception __ex)
+        {
+            __result.abort(__ex);
+        }
+        return __result;
+    }
+
+    public UserDto end_updateByPeimaryKey(Ice.AsyncResult __iresult)
+    {
+        IceInternal.OutgoingAsync __result = IceInternal.OutgoingAsync.check(__iresult, this, __updateByPeimaryKey_name);
         try
         {
             if(!__result.__wait())
@@ -174,13 +348,13 @@ public final class UserSlicePrxHelper extends Ice.ObjectPrxHelperBase implements
         }
     }
 
-    static public void __getUserInfoByPeimaryKey_completed(Ice.TwowayCallbackArg1<UserDto> __cb, Ice.AsyncResult __result)
+    static public void __updateByPeimaryKey_completed(Ice.TwowayCallbackArg1<UserDto> __cb, Ice.AsyncResult __result)
     {
         com.project.api.slice.user.UserSlicePrx __proxy = (com.project.api.slice.user.UserSlicePrx)__result.getProxy();
         UserDto __ret = null;
         try
         {
-            __ret = __proxy.end_getUserInfoByPeimaryKey(__result);
+            __ret = __proxy.end_updateByPeimaryKey(__result);
         }
         catch(Ice.LocalException __ex)
         {

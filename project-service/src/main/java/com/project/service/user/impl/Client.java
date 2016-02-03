@@ -1,11 +1,12 @@
 package com.project.service.user.impl;
 
+import com.project.api.slice.user.UserDto;
 import com.project.api.slice.user.UserSlicePrx;
 import com.project.api.slice.user.UserSlicePrxHelper;
+import lombok.extern.slf4j.Slf4j;
 
 
-
-
+@Slf4j
 public class Client {
 	public static void main(String[] args) {
 		int status = 0;
@@ -17,7 +18,8 @@ public class Client {
 			if (userSlicePrx == null)
 				throw new Error("Invalid proxy");
 
-			userSlicePrx.getUserInfoByPeimaryKey(1L);
+			UserDto userDto = userSlicePrx.getUserInfoByPeimaryKey(1L);
+			log.info("return:" + userDto.loginName);
 		} catch (Ice.LocalException e) {
 			e.printStackTrace();
 			status = 1;
