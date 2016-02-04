@@ -1,5 +1,7 @@
 package com.project.service;
 
+import com.project.api.slice.common.BussinessResponse;
+import com.project.api.slice.user._UserSliceOperations;
 import lombok.extern.slf4j.Slf4j;
 
 import org.junit.Test;
@@ -13,18 +15,13 @@ import com.project.service.user.UserService;
 public class UserServicelTest extends AbstractTest {
 
 	@Autowired
-	private UserService userService;
+	private _UserSliceOperations userService;
 
 	@Test
 	public void testGet() throws InterruptedException {
 		//
 
-		User user = userService.selectByPrimaryKey(1L);
-		log.info("user name {}", user.getLoginName());
-		user.setLoginName("666");
-		userService.updateByPrimaryKey(user);
-
-		User user2 = userService.selectByPrimaryKey(1L);
-		log.info("user2:{}", new Gson().toJson(user2));
+		BussinessResponse bussinessResponse = userService.getUserInfoByPeimaryKey(1L, null);
+		log.info("bussinessResponse jsonObject {}", bussinessResponse.jsonObject);
 	}
 }

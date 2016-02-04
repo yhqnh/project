@@ -2,6 +2,7 @@ package com.project.service.user.impl;
 
 import com.google.gson.Gson;
 import com.project.api.slice.common.BussinessResponse;
+import com.project.api.slice.user._UserSliceOperations;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.BeanUtils;
@@ -20,7 +21,7 @@ import com.project.service.user.UserService;
 @Service
 @Slf4j
 @Transactional
-public class UserServiceImpl extends _UserSliceDisp {
+public class UserServiceImpl implements _UserSliceOperations {
 
     @Autowired
     private UserDao userDao;

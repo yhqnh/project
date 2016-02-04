@@ -8,10 +8,12 @@ buildscript {
 }
 
 slice {
+    // window要么设置环境变量ICE_HOME，要么通过以下设置
     // iceHome = 'D:/ProgramFiles/ZeroC/Ice-3.6.1'
     output = file("src/main/slice-generated-src")
     java {
-        args = "--impl-tie -Isrc/main/slice"
+        args = "--impl --tie"
+        include = [projectDir.path + "/src/main/slice"]
     }
 }
 

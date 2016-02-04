@@ -23,9 +23,9 @@ public class UserServant implements IceBox.Service {
 
     @Override
     public void start(String name, Communicator communicator, String[] strings) {
-        _adapter = communicator.createObjectAdapter(name);
-        _adapter.add(new UserServiceImpl(), communicator.stringToIdentity("hello"));
-        _adapter.activate();
+//        _adapter = communicator.createObjectAdapter(name);
+//        _adapter.add(new UserServiceImpl(), communicator.stringToIdentity("hello"));
+//        _adapter.activate();
     }
 
     @Override
